@@ -1,0 +1,52 @@
+For model training: run "python train.py" with the flags below
+
+ELEC 475: Lab 2 Model Trainer
+
+options:
+  -h, --help            show this help message and exit
+  --model {lenet,lenet_modern,alexnet,zoo_alexnet}
+                        Model architecture: 'lenet', 'lenet_modern', 'alexnet', 'zoo_alexnet'
+  --norm {none,lrn,bn}  Normalization for AlexNet: 'none', 'lrn', 'bn'
+  --pretrained          Use pretrained weights for Model Zoo architectures
+  --dataset {cifar10,tiny_imagenet}
+                        Dataset: 'cifar10' or 'tiny_imagenet'
+  --data-dir DATA_DIR   Directory where dataset is stored
+  --epochs EPOCHS       Number of training epochs
+  --batch-size BATCH_SIZE
+                        Batch size
+  --lr LR               Learning rate
+  --seed SEED           Random seed for reproducibility across CPU/GPU/NumPy
+  --no-augment          Disable training data augmentation
+  --save-model SAVE_MODEL
+                        Path to save best model checkpoint (.pth)
+  --plot-file PLOT_FILE
+                        Path to save loss and accuracy curve plot
+  --early-stopping      Enable early stopping mechanism
+  --early-stopping-metric {val_loss,val_acc,val_f1}
+                        Validation metric to monitor for early stopping: 'val_loss', 'val_acc', or 'val_f1'
+  --patience PATIENCE   Early stopping patience (epochs without improvement)
+  --min-delta MIN_DELTA
+                        Minimum delta threshold to qualify as improvement
+
+The trails in the master ablation table are reproducible with the following commands:
+
+python train.py --model lenet --dataset cifar10 --epochs 10
+python train.py --model lenet --dataset tiny_imagenet --epochs 10
+
+python train.py --model lenet_modern --dataset cifar10 --epochs 10
+python train.py --model lenet_modern --dataset tiny_imagenet --epochs 10
+
+python train.py --model alexnet --norm none --no-augment --dataset cifar10 --epochs 10
+python train.py --model alexnet --norm none --no-augment --dataset tiny_imagenet --epochs 10
+
+python train.py --model alexnet --norm lrn --no-augment --dataset cifar10 --epochs 10
+python train.py --model alexnet --norm lrn --no-augment --dataset tiny_imagenet --epochs 10
+
+python train.py --model alexnet --norm bn --no-augment --dataset cifar10 --epochs 10
+python train.py --model alexnet --norm bn --no-augment --dataset tiny_imagenet --epochs 10
+
+python train.py --model alexnet --norm bn --dataset cifar10 --epochs 10
+python train.py --model alexnet --norm bn --dataset tiny_imagenet --epochs 10
+
+python train.py --model zoo_alexnet --no-augment --dataset cifar10 --epochs 10
+python train.py --model zoo_alexnet --no-augment --dataset tiny_imagenet --epochs 10  
